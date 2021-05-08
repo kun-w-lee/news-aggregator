@@ -23,19 +23,21 @@ def get_news():
 
     # print(articles)
 
-    for x, y in enumerate(articles):
-        print(f'{x} {y["title"]}')
+    # for x, y in enumerate(articles):
+    #     print(f'{x} {y["title"]}')
 
     for key, value in articles[0].items():
         print(f"\n{key.ljust(15)} {value}")
 
-    pub_date = dt.datetime.strptime(
-        articles[0]['publishedAt'], "%Y-%m-%dT%H:%M:%SZ").date()
+    # print(articles[0].items)
 
-    print(pub_date)
-    print(pub_date.year)
-    print(pub_date.month)
-    print(pub_date.day)
+    # pub_date = dt.datetime.strptime(
+    #     articles[0]['publishedAt'], "%Y-%m-%dT%H:%M:%SZ").date()
+
+    # print(pub_date)
+    # print(pub_date.year)
+    # print(pub_date.month)
+    # print(pub_date.day)
 
 
 get_news()

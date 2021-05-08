@@ -6,10 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- link css file -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="/static/css/main.css">
+
     {% block head %}{% endblock %}
 </head>
 <body>
+
+    <div class="jumbotron">
+        <h1>
+            Flask Simple News Web App
+        </h1>
+    </div>
+
+
+    <div class="container">
+        {% for new, des, i, s in context %}
+        <img src="{{i}}" alt = "">
+        <h3>News: </h3> {{new}}
+        <h4>Description: </h4> {{des}}
+        <h5>Source: </h5> {{s}}
+        {% endfor %}
+    </div>
+
     {% block body %}{% endblock %}
 </body>
 </html>
