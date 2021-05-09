@@ -1,57 +1,58 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from newsapi import NewsApiClient
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-
 my_api_key = '4da6b3bee82a4f26aa7fb66537d31e3f'
+
+# starting page
 
 
 @app.route('/')
 def index():
+    return render_template('index.html', context=get_news(True, None), start=True)
+
+
+# get the news for the users' input
+@app.route('/get_news', methods=['POST', 'GET'])
+def news_bar():
+    if request.method == 'POST':
+        pass
+    elif request.method == 'GET':
+        temp = request.args.get('char1')
+        return render_template('base.html', char1=temp, start=False, context=get_news(False, temp))
+
+
+def get_news(start, url_query):
     newsapi = NewsApiClient(api_key=my_api_key)
-    topheadlines = newsapi.get_top_headlines(country='ca', category='business')
+    if (start == True):
+        # get headlines
+        topheadlines = newsapi.get_top_headlines(
+            country='ca', category='business')
+        articles = topheadlines['articles']
+    else:
+        # change pg size later
+        pg_size = 10
 
-    articles = topheadlines['articles']
+        data = newsapi.get_everything(
+            q=url_query, language='en', page_size=pg_size)
+        articles = data['articles']
 
+    # get info for the articles
     desc = []
     news = []
     img = []
     source = []
-
     for i in range(len(articles)):
         myarticles = articles[i]
-
         news.append(myarticles['title'])
         desc.append(myarticles['description'])
         img.append(myarticles['urlToImage'])
         source.append(myarticles['source'])
 
     mylist = zip(news, desc, img, source)
-
-    return render_template('index.html', context=mylist)
-
-
-def get_news():
-    newsapi = NewsApiClient(api_key=my_api_key)
-    topheadlines = newsapi.get_top_headlines(country='ca', category='business')
-
-    articles = topheadlines['articles']
-
-    desc = []
-    news = []
-    img = []
-
-    for i in range(len(articles)):
-        myarticles = articles[i]
-
-        news.append(myarticles['title'])
-        desc.append(myarticles['description'])
-        img.append(myarticles['urlToImage'])
-
-    mylist = zip(news, desc, img)
+    return mylist
 
 
 if __name__ == "__main__":

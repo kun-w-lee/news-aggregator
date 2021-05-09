@@ -18,15 +18,38 @@
         </h1>
     </div>
 
-
-    <div class="container">
-        {% for new, des, i, s in context %}
-        <img src="{{i}}" alt = "">
-        <h3>News: </h3> {{new}}
-        <h4>Description: </h4> {{des}}
-        <h5>Source: </h5> {{s}}
-        {% endfor %}
+    <form method="GET" action="/get_news">
+        <div>
+            <label for="char1"> What do you want to search? </label>
+            <input type="text" name="char1">
+        </div>
+    </form>
+    <div>
+        <p>
+            {% if start == True %}
+                <div class="container">
+                    {% for new, des, i, s in context %}
+                    <img src="{{i}}" alt = "">
+                    <h3>News: </h3> {{new}}
+                    <h4>Description: </h4> {{des}}
+                    <h5>Source: </h5> {{s}}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class ="container">
+                    {% for new, des, i, s in context %}
+                    <img src="{{i}}" alt = "">
+                    <h3>News: </h3> {{new}}
+                    <h4>Description: </h4> {{des}}
+                    <h5>Source: </h5> {{s}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </p>
     </div>
+    
+
+
 
     {% block body %}{% endblock %}
 </body>
