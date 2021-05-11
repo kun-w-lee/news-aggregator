@@ -10,6 +10,37 @@
 
     {% block head %}{% endblock %}
 </head>
+
+<style>
+    .media-list{
+        list-style: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        list-style: none;
+        padding: 0;
+    }
+    .media-list-item {
+        flex: auto;
+        display: flex;
+        box-sizing: border-box;
+        width: 33.3333333333%;
+        float: left;
+        padding-left: 8px;
+        padding-right: 8px;
+        box-sizing: 33.3333333333%;
+    }
+    .responsive_image {
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 56.25%;
+        box-shadow: inset 0 0 80px rgb(0 0 0 / 50%);
+    }
+    .media_image img {
+        display: block;
+        width: 100%;
+      
+    }
+</style>
 <body>
 
     <div class="jumbotron">
@@ -28,22 +59,50 @@
         <p>
             {% if start == True %}
                 <div class="container">
-                    {% for new, des, i, s in context %}
-                    <img src="{{i}}" alt = "">
-                    <h3>News: </h3> {{new}}
-                    <h4>Description: </h4> {{des}}
-                    <h5>Source: </h5> {{s}}
-                    {% endfor %}
+                    <ul class="media-list">
+                        {% for new, des, i, s in context %}
+                        <li class="media-list-item">
+                            <div class="media">
+                                <div class="media_image">
+                                    <div class="responsive_image">
+                                        <img src="{{i}}" alt = "">
+                                    </div>
+                                </div>
+                                <div class="media_content">
+                                    <h3 class="media_title">{{new}}</h3>
+                                </div>
+                                <p class="media_summary">
+                                    {{des}}
+                                </p>
+                                <a href="" class="media_source"> {{s}} </a>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             {% else %}
-                <div class ="container">
+            <div class="container">
+                <ul class="media-list">
                     {% for new, des, i, s in context %}
-                    <img src="{{i}}" alt = "">
-                    <h3>News: </h3> {{new}}
-                    <h4>Description: </h4> {{des}}
-                    <h5>Source: </h5> {{s}}
+                    <li class="media-list-item">
+                        <div class="media">
+                            <div class="media_image">
+                                <div class="responsive_image">
+                                    <img src="{{i}}" alt = "">
+                                </div>
+                            </div>
+                            <div class="media_content">
+                                <h3 class="media_title">{{new}}</h3>
+                            </div>
+                            <p class="media_summary">
+                                {{des}}
+                            </p>
+                            <a href="" class="media_source"> {{s}} </a>
+                        </div>
+                    </li>
                     {% endfor %}
-                </div>
+                </ul>
+            </div>
             {% endif %}
         </p>
     </div>
