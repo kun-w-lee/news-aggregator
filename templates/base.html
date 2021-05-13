@@ -8,12 +8,14 @@
     <!-- link css file -->
     <link rel="stylesheet" href="/static/css/main.css">
 
-    {% block head %}{% endblock %}
 </head>
 
 <style>
     .search_bar {
         padding-bottom: 50px;
+    }
+    .search {
+        padding: 5px;
     }
     .media-list{
         padding-top: 50px;
@@ -48,7 +50,6 @@
     }
 </style>
 <body>
-
     <div class="jumbotron">
         <h1>
             Flask Simple News Web App
@@ -56,9 +57,16 @@
     </div>
 
     <form method="GET" action="/get_news" class="search_bar">
-        <div>
+        <div class = "search">
             <label for="char1"> What do you want to search? </label>
             <input type="text" name="char1">
+        </div>
+        <div class = "search">
+            <label for="num1"> How many articles do you want? </label>
+            <input type="text" name="num1">
+        </div>
+        <div class='button'>
+            <button type="submit">Enter</button>
         </div>
     </form>
     <div>
@@ -111,10 +119,5 @@
         </div>
         {% endif %}
     </div>
-    
-
-
-
-    {% block body %}{% endblock %}
 </body>
 </html>

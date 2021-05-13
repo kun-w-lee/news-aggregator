@@ -11,7 +11,7 @@ my_api_key = '4da6b3bee82a4f26aa7fb66537d31e3f'
 
 @app.route('/')
 def index():
-    return render_template('index.html', context=get_news(True, None), start=True)
+    return render_template('index.html', context=get_news(True, None, None), start=True)
 
 
 # get the news for the users' input
@@ -21,10 +21,11 @@ def news_bar():
         pass
     elif request.method == 'GET':
         temp = request.args.get('char1')
-        return render_template('base.html', char1=temp, start=False, context=get_news(False, temp))
+        temp2 = int(request.args.get('num1'))
+        return render_template('base.html', char1=temp, num1=temp2, start=False, context=get_news(False, temp, temp2))
 
 
-def get_news(start, url_query):
+def get_news(start, url_query, num_articles):
     newsapi = NewsApiClient(api_key=my_api_key)
     if (start == True):
         # get headlines
@@ -32,11 +33,8 @@ def get_news(start, url_query):
             country='ca', category='business')
         articles = topheadlines['articles']
     else:
-        # change pg size later
-        pg_size = 10
-
         data = newsapi.get_everything(
-            q=url_query, language='en', page_size=pg_size)
+            q=url_query, language='en', page_size=num_articles)
         articles = data['articles']
 
     # get info for the articles
