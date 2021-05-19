@@ -7,8 +7,6 @@ app = Flask(__name__)
 my_api_key = '4da6b3bee82a4f26aa7fb66537d31e3f'
 
 # starting page
-
-
 @app.route('/')
 def index():
     return render_template('index.html', context=get_news(True, None, None), start=True)
