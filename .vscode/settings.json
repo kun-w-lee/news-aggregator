@@ -1,3 +1,4 @@
 {
-    "liveServer.settings.multiRootWorkspaceName": "news-aggregator"
+    "liveServer.settings.multiRootWorkspaceName": "news-aggregator",
+    "python.pythonPath": "C:\\Users\\danie\\news-aggregator\\Scripts\\python.exe"
 }

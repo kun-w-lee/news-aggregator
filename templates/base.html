@@ -51,9 +51,11 @@
 </style>
 <body>
     <div class="jumbotron">
-        <h1>
-            Flask Simple News Web App
-        </h1>
+        <a href="http://127.0.0.1:5000/">
+            <h1>
+                Flask Simple News Web App
+            </h1>
+        </a>
     </div>
 
     <form method="GET" action="/get_news" class="search_bar">
@@ -65,6 +67,32 @@
             <label for="num1"> How many articles do you want? </label>
             <input type="text" name="num1">
         </div>
+        <div class="search">
+              <label for="source">Chose news source</label>
+              <select name="source" id="source">
+                <option value="all">ALL</option>
+                <option value="CNN">CNN</option>
+                <option value="KitchenerToday.com">KitchenerToday</option>
+                <option value="Novascotia.ca">Novascotia</option>
+                <option value="Ctvnews.ca">CTV news</option>
+                <option value="windsoriteDOTca News">windsoriteDOTca News</option>
+                <option value="Tbnewswatch.com">Tbnewswatch</option>
+                <option value="Engadget">Engadget</option>
+                <option value="Lifehacker.com">Lifehacker</option>
+                <option value="TechCrunch">TechCrunch</option>
+                <option value="The Verge">The Verge</option>
+                <option value="BBC News">BBC News</option>
+                <option value="Gizmondo.com">Gizmondo</option>
+                <option value="Mashable">Mashable</option>
+                <option value="Castanet.net">Castanet</option>
+                <option value="INSIDER">INSIDER</option>
+                <option value="CBC News">CBC News</option>
+                <option value="Ceoworld.biz">Ceoworld</option>
+                <option value="Inc.">Inc</option>
+                <option value="Motor1 ">Motor</option>
+                <option value="">Inc</option>
+              </select>
+        </div>
         <div class='button'>
             <button type="submit">Enter</button>
         </div>
@@ -73,22 +101,24 @@
         {% if start == True %}
             <div class="container">
                 <ul class="media-list">
-                    {% for new, des, i, s in context %}
+                    {% for new, des, image, source, url in context %}
                     
                     <li class="media-list-item">
                         <div class="media">
                             <div class="media_image">
                                 <div class="responsive_image">
-                                    <img src="{{i}}" alt = "">
+                                    <img src="{{image}}" alt = "">
                                 </div>
                             </div>
-                            <div class="media_content">
-                                <h3 class="media_title">{{new}}</h3>
-                            </div>
+                            <a href="{{url}}">
+                                <div class="media_content">
+                                    <h3 class="media_title">{{new}}</h3>
+                                </div>
+                            </a>
                             <p class="media_summary">
                                 {{des}}
                             </p>
-                            <a href="" class="media_source"> {{s}} </a>
+                            <a href="" class="media_source"> {{source}} </a>
                         </div>
                     </li>
                     {% endfor %}
@@ -97,21 +127,23 @@
         {% else %}
         <div class="container">
             <ul class="media-list">
-                {% for new, des, i, s in context %}
+                {% for new, des, image, source, url in context %}
                 <li class="media-list-item">
                     <div class="media">
                         <div class="media_image">
                             <div class="responsive_image">
-                                <img src="{{i}}" alt = "">
+                                <img src="{{image}}" alt = "">
                             </div>
                         </div>
-                        <div class="media_content">
-                            <h3 class="media_title">{{new}}</h3>
-                        </div>
+                        <a href="{{url}}">
+                            <div class="media_content">
+                                <h3 class="media_title">{{new}}</h3>
+                            </div>
+                        </a>
                         <p class="media_summary">
                             {{des}}
                         </p>
-                        <a href="" class="media_source"> {{s}} </a>
+                        <a href="" class="media_source"> {{source}} </a>
                     </div>
                 </li>
                 {% endfor %}
